@@ -3,6 +3,7 @@
 #include <time.h>
 /**
  * main - Entry point
+ * Description: checks on the last digit of the assigned variables
  * Return: Always return 0 (success)
  */
 int main(void)
@@ -12,7 +13,7 @@ int main(void)
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
-	m = % 10;
+	m = n % 10;
 	if (m > 5)
 		printf("Last digit of %d is %d and is greater than 5\n", n, m);
 	if (m == 0)
