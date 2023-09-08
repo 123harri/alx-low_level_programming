@@ -5,7 +5,12 @@
  * Return: Always 0 (success)
  */
 int main(void)
-putchar('0');
+{
+int a;
+for (a = 0; a < 10; a++)
+{
+putchar(a + '0');
+}
 putchar('\n');
 return (0);
 }
