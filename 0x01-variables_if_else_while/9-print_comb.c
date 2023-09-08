@@ -5,12 +5,14 @@
  */
 int main(void)
 {
-putchar('0');
-for (int i = 1; i < 10; i++)
+int num;
+for (num = 0; num <= 9; num++)
 {
+putchar((num % 10) + '0');
+if (num == 9)
+continue;
 putchar(',');
 putchar(' ');
-putchar(i + '0');
 }
 putchar('\n');
 return (0);
