@@ -38,11 +38,11 @@ if (start > end)
 return (-1);
 }
 mid = (start + end) / 2;
-if (mid * mid == n)
+if ((mid *mid) == n)
 {
 return (mid);
 }
-else if (mid * mid < n)
+else if ((mid *mid) < n)
 {
 return (find_sqrt(n, mid + 1, end));
 }
