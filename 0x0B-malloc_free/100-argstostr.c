@@ -46,6 +46,6 @@ for (i = 0; i < ac; i++)
 	result[index] = '\n';
 		index++;
 }
-result[index] = '\n';
+result[index] = '\0';
 return (result);
 }
