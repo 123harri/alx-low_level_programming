@@ -1,82 +1,92 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#define ERR_MSG "Error"
 /**
- * multiply - multiplies two positive numbers
- * @num1: first number
- * @num2: second number
- * @result: pointer to store the result
- * Return: the length of the result
+ * is_digit - Function to check if a character is a digit
+ * @s: The character to be checked
+ * Return: 1 if it is a digit, 0 otherwise
  */
-int multiply(char *num1, char *num2, int **result)
+int is_digit(char *s)
 {
-	int len1 = 0, len2 = 0, i, j, c, p, final_index;
-	int *res;
-
-while (num1[len1] != '\0')
-	len1++;
-while (num2[len2] != '\0')
-	len2++;
-
-res = malloc(sizeof(int) * (len1 + len2));
-if (res == NULL)
-	exit(98);
-
-for (i = 0; i < len1 + len2; i++)
-	res[i] = 0;
-for (i = len1 - 1; i >= 0; i--)
+int i = 0;
+while (s[i])
 {
-	c = 0;
-for (j = len2 - 1; j >= 0; j--)
-
-	p = (num1[i] - '0') * (num2[j] - '0') + res[i + j + 1] + c;
-res[i + j + 1] = p % 10;
-c = p / 10;
+if (s[i] < '0' || s[i] > '9')
+return (0);
+i++;
 }
-res[i + j + 1] += c;
-
-for (i = 0; i < len1 + len2; i++)
-{
-if (res[i] != 0)
-break;
+return (1);
 }
-*result = malloc(sizeof(int) * (len1 + len2 - i));
-if (*result == NULL)
+/**
+ * _strlen - returns the length of a string
+ * @s: string to evluate
+ * Return: the length of a string
+ */
+int _strlen(char *s)
+{
+int i = 0;
+while (s[i] != '\0')
+{
+i++;
+}
+return (i);
+}
+/**
+ * errors - handles errors for main
+ */
+void errors(void)
+{
+printf("Error\n");
 exit(98);
-final_index = i;
-for (i = final_index, j = 0; i < len1 + len2; i++, j++)
-(*result)[j] = res[i];
-free(res);
-return (len1 + len2 - final_index);
 }
 /**
- * main - program entry point
- * @argc: argument count
- * @argv: argument vector
- * Return: 0 on success, 98 on failure
+ * main - Function to multiply two positive numbers
+ * @argc: The number arguments
+ * @argv: array of arguments
+ * Return: always 0 (success)
  */
-
 int main(int argc, char *argv[])
 {
-int *result;
-int result_len, i, j;
+char *s1, *s2;
+int len1, len2, len, i, c, d1, d2, *res, a = 0;
 
-if (argc != 3)
-exit(98);
-
-for (i = 1; i < argc; i++)
+s1 = argv[1], s2 = argv[2];
+if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+errors();
+len1 = _strlen(s1);
+len2 = _strlen(s2);
+len = len1 + len2 + 1;
+res = malloc(sizeof(int) * len);
+if (!res)
+return (1);
+for (i = 0; i <= len1 + len2; i++)
+res[i] = 0;
+for (len1 = len1 - 1; len1 >= 0; len1--)
 {
-for (j = 0; argv[i][j] != '\0'; j++)
+d1 = s1[len1] - '0';
+c = 0;
+for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
 {
-
-if (argv[i][j] < '0' || argv[i][j] > '9')
-exit(98);
+d2 = s2[len2] - '0';
+c += res[len1 + len2 + 1] + (d1 *d2);
+res[len1 + len2 + 1] = c % 10;
+c /= 10;
 }
+if (c > 0)
+res[len1 + len2 + 1] += c;
 }
-result_len = multiply(argv[1], argv[2], &result);
-
-for (i = 0; i < result_len; i++)
-putchar(result[i] + '0');
-putchar('\n');
-free(result);
+for (i = 0; i < len - 1; i++)
+{
+if (res[i])
+a = 1;
+if (a)
+_putchar(res[i] + '0');
+}
+if (!a)
+_putchar('0');
+_putchar('\n');
+free(res);
 return (0);
 }
