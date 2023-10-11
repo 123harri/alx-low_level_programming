@@ -1,5 +1,4 @@
 #include "3-calc.h"
-#include <stdio.h>
 #include <stdlib.h>
 /**
  * get_op_func - function that selects the correct
@@ -20,7 +19,7 @@ op_t ops[] = {
 
 int i = 0;
 
-if (*(ops[i].op) != *s && s[i] != '\0')
+while (ops[i].op != NULL && *(ops[i].op) != *s)
 i++;
 
 return (ops[i].f);
